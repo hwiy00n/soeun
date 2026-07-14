@@ -16,9 +16,7 @@ function LetterScreen({ onBack }) {
   }
 
   // 휘윤님이 전할 편지 내용
-  const letterText = `사랑하는 쏘으밍,
-
-이 편지를 연 당신을 축하합니다람쥐
+  const letterText = `To 쏘쏘쏘은,
 
 으하하 소으밍 안뇽~! 소으밍이 그동안 계속 편지 써달라고 노래를 불렀는데 이제야 써준다는! 오랜만에 각 잡고 편지 쓸려니 좀 어색하네잉 ㅋ
 
