@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Pen+Script&display=swap');
+
+:root {
+  --primary: #ff6b8b;
+  --primary-light: #ff8da6;
+  --primary-dark: #e04d6e;
+  --bg-romantic: #fff0f3;
+  --text-dark: #4a3e40;
+  --text-light: #fff;
+  --font-romantic: 'Gowun Batang', serif;
+  --font-handwritten: 'Nanum Pen Script', cursive;
+  --glass-bg: rgba(255, 255, 255, 0.35);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --shadow-romantic: 0 8px 32px 0 rgba(255, 107, 139, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-romantic);
+  background-color: var(--bg-romantic);
+  color: var(--text-dark);
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+#root {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 전체 브라우저 화면의 중앙에 액자를 배치하기 위한 컨테이너 */
+.app-outer-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  background: linear-gradient(135deg, #ffe5ec, #ffccd5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* 네 컷 사진 규격(2:3 비율)에 맞춘 메인 프레임 */
+.app-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 100%;
+  max-height: 92vh;
+  max-height: 92svh;
+  aspect-ratio: 2 / 3;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 15px 45px rgba(255, 107, 139, 0.25);
+  border: 10px solid #fff; /* 네 컷 사진 인화지 프레임 느낌 */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    max-height: 100vh;
+    max-height: 100svh;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 243, 0.15),
+    rgba(255, 182, 193, 0.1)
+  );
+  backdrop-filter: blur(0px); /* 블러를 아예 없애서 사진이 완전히 선명하게 보이도록 함 */
+  z-index: 2;
+}
+
+/* 글래스 카드 스타일 */
+.glass-card {
+  position: relative;
+  z-index: 10;
+  width: 90%;
+  max-width: 420px;
+  padding: 2.5rem 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-romantic);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeInScale 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.title-text {
+  font-size: 1.35rem;
+  line-height: 1.6;
+  font-weight: 700;
+  color: var(--text-dark);
+  word-break: keep-all;
+}
+
+.btn-container {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  width: 100%;
+  height: 56px; /* 버튼 튕김 시 레이아웃 흔들림 방지 */
+  position: relative;
+}
+
+.btn {
+  padding: 0.8rem 2.2rem;
+  font-family: var(--font-romantic);
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: var(--text-light);
+  box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+  animation: heartbeat 2s infinite ease-in-out;
+  z-index: 11;
+}
+
+.btn-yes:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 107, 139, 0.6);
+}
+
+.btn-no {
+  background: #f0e6e8;
+  color: #8c7e81;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.06); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.06); }
+  70% { transform: scale(1); }
+}
+
+/* 편지 화면 */
+.letter-screen {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* 3D 편지 봉투 디자인 */
+.envelope-wrapper {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  background-color: #ffd0d7;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  z-index: 12;
+}
+
+.envelope-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.envelope-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 115px solid #ffb3c1; /* 접힌 부분 */
+  transform-origin: top;
+  transition: transform 0.4s ease 0.4s, z-index 0.2s ease 0.4s;
+  z-index: 15;
+}
+
+.envelope-wrapper.open::before {
+  transform: rotateX(180deg);
+  z-index: 9;
+}
+
+.envelope-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 160px solid #ffccd5;
+  border-right: 160px solid #ffccd5;
+  border-top: 110px solid transparent;
+  border-bottom: 110px solid #ffccd5;
+  border-radius: 0 0 8px 8px;
+  z-index: 14;
+}
+
+/* 편지 하트 씰링 */
+.heart-seal {
+  position: absolute;
+  top: 95px;
+  left: 145px;
+  width: 30px;
+  height: 30px;
+  background-color: var(--primary);
+  transform: rotate(-45deg);
+  z-index: 16;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.heart-seal::before,
+.heart-seal::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: var(--primary);
+  border-radius: 50%;
+}
+
+.heart-seal::before {
+  top: -15px;
+  left: 0;
+}
+
+.heart-seal::after {
+  top: 0;
+  left: 15px;
+}
+
+.envelope-wrapper.open .heart-seal {
+  transform: scale(0) rotate(-45deg);
+  opacity: 0;
+}
+
+/* 편지 내용 용지 (봉투에서 올라오는 연출) */
+.letter-paper {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+  width: 290px;
+  height: 200px;
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  transition: transform 0.5s ease 0.6s, height 0.5s ease 0.6s, bottom 0.5s ease 0.6s, z-index 0s ease 0.6s;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.envelope-wrapper.open .letter-paper {
+  transform: translateY(-90px);
+  height: 180px;
+  z-index: 11;
+  bottom: 0px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 편지가 열렸을 때 화면 전체에 표시될 딤드 오버레이 */
+.letter-dim-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 10, 15, 0.45);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.letter-dim-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 화면 한가운데에 배치되는 모달 편지지 */
+.letter-paper-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 400px;
+  max-height: 80vh;
+  max-height: 80svh;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 2rem 1.8rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+}
+
+.letter-paper-modal.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.letter-text {
+  font-family: var(--font-romantic);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #4a3e40;
+  white-space: pre-line;
+  text-align: left;
+  margin-top: 15px;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 5px;
+}
+
+.letter-title {
+  font-family: var(--font-romantic);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  border-bottom: 2px dashed #ffccd5;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 닫기 버튼 */
+.btn-close {
+  margin-top: 1.2rem;
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(255, 107, 139, 0.25);
+  transition: all 0.3s ease;
+  font-family: var(--font-romantic);
+  font-weight: 700;
+}
+
+.btn-close:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* 하트 입자(파티클) 효과 */
+.heart-particle {
+  position: absolute;
+  color: rgba(255, 107, 139, 0.65);
+  font-size: 20px;
+  pointer-events: none;
+  z-index: 5;
+  animation: floatUp 4s linear infinite;
+  bottom: -50px;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-105vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* 반응형 모바일 대응 */
+@media (max-width: 480px) {
+  .title-text {
+    font-size: 1.2rem;
+  }
+  .glass-card {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+  .envelope-wrapper {
+    width: 290px;
+    height: 200px;
+  }
+  .envelope-wrapper::before {
+    border-left-width: 145px;
+    border-right-width: 145px;
+    border-top-width: 105px;
+  }
+  .envelope-wrapper::after {
+    border-left-width: 145px;
+    border-right-width: 145px;
+    border-top-width: 100px;
+    border-bottom-width: 100px;
+  }
+  .heart-seal {
+    top: 85px;
+    left: 130px;
+  }
+  .letter-paper {
+    width: 260px;
+    height: 180px;
+    left: 15px;
+  }
+  .envelope-wrapper.open .letter-paper {
+    transform: translateY(-130px);
+    height: 340px;
+  }
+}
