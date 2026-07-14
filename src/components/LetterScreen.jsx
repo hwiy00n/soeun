@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import futureImg from '../assets/future.jpg'
 
 function LetterScreen({ onBack }) {
   const [isOpen, setIsOpen] = useState(false)
   const [showModal, setShowModal] = useState(false)
+  const [showFuture, setShowFuture] = useState(false)
 
   // 편지 봉투 클릭 시 열림 상태로 전환하고 잠시 후 모달을 띄움
   const handleOpenEnvelope = () => {
@@ -13,7 +15,7 @@ function LetterScreen({ onBack }) {
     }, 1100) // 봉투가 완전히 열리고 편지가 올라오는 애니메이션 이후 모달 띄우기
   }
 
-  // 휘윤님이 전할 편지 내용 (원하시는 대로 수정하실 수 있습니다!)
+  // 휘윤님이 전할 편지 내용
   const letterText = `사랑하는 쏘으밍,
 
 이 편지를 연 당신을 축하합니다람쥐
@@ -107,23 +109,98 @@ function LetterScreen({ onBack }) {
       </div>
 
       {/* 화면 전체 딤 레이어 */}
-      <div className={`letter-dim-overlay ${showModal ? 'active' : ''}`}></div>
+      <div className={`letter-dim-overlay ${showModal || showFuture ? 'active' : ''}`}></div>
 
       {/* 화면 정중앙에 고정되어 나타나는 실제 모달 편지지 */}
-      <div className={`letter-paper-modal ${showModal ? 'active' : ''}`}>
+      <div className={`letter-paper-modal ${showModal && !showFuture ? 'active' : ''}`}>
         <h2 className="letter-title">To. 사랑하는 소은이에게 💖</h2>
         <div className="letter-text">
           {letterText}
+
+          {/* 미래 보기 제안 섹션 */}
+          <div className="future-prompt-section" style={{
+            marginTop: '2.5rem',
+            padding: '1.5rem 0 0.5rem',
+            borderTop: '2px dashed #ffccd5',
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '0.8rem'
+          }}>
+            <p style={{
+              fontFamily: 'var(--font-romantic)',
+              fontSize: '1rem',
+              fontWeight: '700',
+              color: '#e04d6e',
+              wordBreak: 'keep-all'
+            }}>
+              우리의 미래를 확인해보시겠습니까?
+            </p>
+            <button
+              className="btn"
+              style={{
+                background: 'linear-gradient(135deg, #ff6b8b, #ff8da6)',
+                color: '#fff',
+                padding: '0.6rem 2.2rem',
+                borderRadius: '50px',
+                border: 'none',
+                fontWeight: '700',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                fontFamily: 'var(--font-romantic)',
+                boxShadow: '0 4px 10px rgba(255, 107, 139, 0.3)',
+                animation: 'heartbeat 2s infinite ease-in-out'
+              }}
+              onClick={() => {
+                setShowFuture(true)
+              }}
+            >
+              확인
+            </button>
+          </div>
         </div>
+
         <button
           className="btn btn-close"
+          style={{ opacity: 0.6, marginTop: '0.8rem', background: '#8c7e81', fontSize: '0.85rem', padding: '0.4rem 1.2rem' }}
           onClick={() => {
             setShowModal(false)
             setIsOpen(false)
             onBack()
           }}
         >
-          처음으로
+          편지 닫기
+        </button>
+      </div>
+
+      {/* 미래 확인 모달 */}
+      <div className={`future-modal ${showFuture ? 'active' : ''}`}>
+        <img src={futureImg} alt="우리의 미래" className="future-image" />
+        <p className="future-text">미래를 스포당하셨습니다. 🤵👰💕</p>
+
+        <button
+          className="btn"
+          style={{
+            marginTop: '1.2rem',
+            padding: '0.6rem 2rem',
+            background: 'var(--primary)',
+            color: '#fff',
+            borderRadius: '50px',
+            border: 'none',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            fontFamily: 'var(--font-romantic)',
+            boxShadow: '0 4px 10px rgba(255, 107, 139, 0.25)'
+          }}
+          onClick={() => {
+            setShowFuture(false)
+            setShowModal(false)
+            setIsOpen(false)
+            onBack()
+          }}
+        >
+          처음으로 돌아가기
         </button>
       </div>
     </div>

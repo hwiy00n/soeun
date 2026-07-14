@@ -480,3 +480,60 @@ body {
     height: 340px;
   }
 }
+
+/* 미래 모달 스타일 */
+.future-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 380px;
+  max-height: 85vh;
+  max-height: 85svh;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.25);
+}
+
+.future-modal.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+}
+
+.future-image {
+  width: 100%;
+  max-height: 52vh;
+  max-height: 52svh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 4px solid #fff0f3;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.future-text {
+  font-family: var(--font-romantic);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-top: 1.2rem;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.future-subtext {
+  font-family: var(--font-handwritten);
+  font-size: 1.6rem;
+  color: #8c7e81;
+  margin-top: 0.3rem;
+  text-align: center;
+}
